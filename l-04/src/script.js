@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 ////// Canvas
 const canvas = document.querySelector("canvas.webgl")
 
@@ -20,7 +22,7 @@ scene.add(mesh)
 
 ////// Camera
 // Window Size
-sizes = {
+const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
