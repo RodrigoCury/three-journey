@@ -6,7 +6,7 @@ Learning Three Js with Three Js Journey
     [*] Basic Scenes
     [*] WebPack
     [*] Transform Objects
-    [ ] Animations
+    [*] Animations
     [ ] Cameras
     [ ] Fullscreen and Resizing
     [ ] Geometries

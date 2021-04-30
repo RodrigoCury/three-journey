@@ -102,3 +102,10 @@ renderer.setSize(sizes.width, sizes.height)
 // Render
 
 renderer.render(scene, camera)
+
+// Animations
+const tick = () => {
+    console.log
+}
+
+tick()
