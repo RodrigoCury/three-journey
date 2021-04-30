@@ -1,12 +1,12 @@
 Learning Three Js with Three Js Journey
 
 * Level 1 - Basics
-    * [*] Intro
-    * [*] What is WebGL and 3js
-    * [*] Basic Scenes
-    * [*] WebPack
-    * [*] Transform Objects
-    * [*] Animations
+    * [X] Intro
+    * [X] What is WebGL and 3js
+    * [X] Basic Scenes
+    * [X] WebPack
+    * [X] Transform Objects
+    * [X] Animations
     * [ ] Cameras
     * [ ] Fullscreen and Resizing
     * [ ] Geometries
