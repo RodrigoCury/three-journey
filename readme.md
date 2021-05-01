@@ -8,7 +8,7 @@ Learning Three Js with Three Js Journey
     * [X] Transform Objects
     * [X] Animations
     * [X] Cameras
-    * [ ] Fullscreen and Resizing
+    * [X] Fullscreen and Resizing
     * [ ] Geometries
     * [ ] Degub UI
     * [ ] Textures
