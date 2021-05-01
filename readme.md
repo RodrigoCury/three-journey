@@ -7,7 +7,7 @@ Learning Three Js with Three Js Journey
     * [X] WebPack
     * [X] Transform Objects
     * [X] Animations
-    * [ ] Cameras
+    * [X] Cameras
     * [ ] Fullscreen and Resizing
     * [ ] Geometries
     * [ ] Degub UI
