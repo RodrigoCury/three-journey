@@ -10,7 +10,7 @@ Learning Three Js with Three Js Journey
     * [X] Cameras
     * [X] Fullscreen and Resizing
     * [X] Geometries
-    * [ ] Degub UI
+    * [X] Degub UI
     * [ ] Textures
     * [ ] Materials
     * [ ] 3D Text
