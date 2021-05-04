@@ -11,7 +11,7 @@ Learning Three Js with Three Js Journey
     * [X] Fullscreen and Resizing
     * [X] Geometries
     * [X] Degub UI
-    * [ ] Textures
+    * [ ] Textures | stop at 50 min
     * [ ] Materials
     * [ ] 3D Text
 
