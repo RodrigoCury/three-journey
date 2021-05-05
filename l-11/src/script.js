@@ -30,7 +30,8 @@ loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
 loadingManager.onError = url => console.error(`Error Loading ${url}`)
 
 const textureLoader = new THREE.TextureLoader(loadingManager)
-const colortexture = textureLoader.load('textures/door/color.jpg')
+// const colortexture = textureLoader.load('textures/checkerboard-8x8.png')
+const colortexture = textureLoader.load('textures/minecraft.png')
 
 // colortexture.repeat.x = 2
 // colortexture.repeat.y = 3
@@ -40,26 +41,30 @@ const colortexture = textureLoader.load('textures/door/color.jpg')
 // colortexture.offset.y = .5
 // colortexture.offset.x = .5
 
-colortexture.rotation = Math.PI * .25
+// colortexture.rotation = Math.PI * .25
 
-colortexture.center.x = .5
-colortexture.center.y = .5
+// colortexture.center.x = .5
+// colortexture.center.y = .5
 
-// const nMap = textureLoader.load('textures/door/normal.jpg')
-// const aoMap = textureLoader.load('textures/door/ambientOcclusion.jpg')
-// const metalnessMap = textureLoader.load('textures/door/metalness.jpg')
-// const roughnessMap = textureLoader.load('textures/door/roughness.jpg')
-// const alphaMap = textureLoader.load('textures/door/alpha.jpg')
-// const displacementMap = textureLoader.load('textures/door/height.jpg',
-//     // On success
-//     () => {
-//         console.log("IT WOOOORKS, MY MONSTEEER")
-//     },
-//     // On Progress
-//     undefined, // currently not supported three v0.124.0
-//     // On Error
-//     error => console.error('Ocorreu um erro ao carregar imagem', error)
-// )
+colortexture.minFilter = THREE.LinearFilter
+
+colortexture.magFilter = THREE.NearestFilter
+
+const nMap = textureLoader.load('textures/door/normal.jpg')
+const aoMap = textureLoader.load('textures/door/ambientOcclusion.jpg')
+const metalnessMap = textureLoader.load('textures/door/metalness.jpg')
+const roughnessMap = textureLoader.load('textures/door/roughness.jpg')
+const alphaMap = textureLoader.load('textures/door/alpha.jpg')
+const displacementMap = textureLoader.load('textures/door/height.jpg',
+    // On success
+    () => {
+        console.log("IT WOOOORKS, MY MONSTEEER")
+    },
+    // On Progress
+    undefined, // currently not supported three v0.124.0
+    // On Error
+    error => console.error('Ocorreu um erro ao carregar imagem', error)
+)
 
 
 /** Vanilla Javascript **/
@@ -75,15 +80,14 @@ colortexture.center.y = .5
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
 console.log(geometry.attributes.uv);
-const material = new THREE.MeshBasicMaterial({
-    color: 0xff0000,
+const material = new THREE.MeshStandardMaterial({
     map: colortexture,
-    // normalMap: nMap,
-    // aoMap: aoMap,
-    // metalnessMap: metalnessMap,
-    // roughnessMap: roughnessMap,
-    // alphaMap: alphaMap,
-    // displacementMap: displacementMap,
+    normalMap: nMap,
+    aoMap: aoMap,
+    metalnessMap: metalnessMap,
+    roughnessMap: roughnessMap,
+    alphaMap: alphaMap,
+    displacementMap: displacementMap,
 
 })
 const mesh = new THREE.Mesh(geometry, material)
@@ -111,6 +115,36 @@ window.addEventListener('resize', () => {
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
+
+let zPositive = false
+let zNegative = false
+let xPositive = false
+let xNegative = false
+
+document.addEventListener('keydown', event => {
+    if (event.key == 'w') {
+        zPositive = true;
+    } else if (event.key == 's') {
+        zNegative = true;
+    } else if (event.key == 'a') {
+        xPositive = true;
+    } else if (event.key == 'd') {
+        xNegative = true;
+    }
+})
+document.addEventListener('keyup', event => {
+    if (event.key == 'w') {
+        zPositive = false;
+    } else if (event.key == 's') {
+        zNegative = false;
+    } else if (event.key == 'a') {
+        xPositive = false;
+    } else if (event.key == 'd') {
+        xNegative = false;
+    }
+})
+
+document.addEventListener('dblclick', () => mesh.position.set(0, 0, 0))
 
 /*
  *Lights
@@ -160,6 +194,16 @@ const tick = () => {
     areaLight.position.x = -Math.sin(elapsedTime)
     areaLight.position.z = -Math.cos(elapsedTime) * 3
     areaLight.lookAt(mesh.position)
+
+    if (zPositive) {
+        mesh.position.z += .1;
+    } if (zNegative) {
+        mesh.position.z -= .1;
+    } if (xPositive) {
+        mesh.position.x += .1
+    } if (xNegative) {
+        mesh.position.x -= .1;
+    }
 
     // Update controls
     controls.update()
