@@ -12,7 +12,7 @@ Learning Three Js with Three Js Journey
     * [X] Geometries
     * [X] Degub UI
     * [X] Textures | stop at 50 min
-    * [ ] Materials
+    * [X] Materials
     * [ ] 3D Text
 
 * Level 2 - Classic Techniques
