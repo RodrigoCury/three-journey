@@ -142,23 +142,25 @@ const moonColorTexture = textureLoader.load("textures/moon/earthTextureMap.jpg")
 // material.wireframe = true
 
 // // Mesh Physical Material
-// const material = new THREE.MeshPhysicalMaterial()
-// material.map = doorColorTexture
-// material.aoMap = doorAmbientOcclusionTexture
-// // alpha needs
-// material.alphaMap = doorAplhaTexture
-// material.transparent = true
+const material = new THREE.MeshPhysicalMaterial()
+material.map = doorColorTexture
+material.aoMap = doorAmbientOcclusionTexture
+// alpha needs
+material.alphaMap = doorAplhaTexture
+material.transparent = true
 
-// material.metalnessMap = doorMetalnessTexture
-// material.roughnessMap = dooRoughnessTexture
-// material.normalMap = doorNormalTexture
-// material.displacementMap = doorHeightTexture
-// material.displacementScale = .15
-// gui.add(material, 'aoMapIntensity').min(0).max(1).step(.01)
-// gui.add(material, 'displacementScale').min(0).max(1).step(.01)
-// gui.add(material.normalScale, 'x').min(0).max(1).step(.01).name("NormalScale X")
-// gui.add(material.normalScale, 'y').min(0).max(1).step(.01).name("NormalScale Y")
+material.metalnessMap = doorMetalnessTexture
+material.roughnessMap = dooRoughnessTexture
+material.normalMap = doorNormalTexture
+material.displacementMap = doorHeightTexture
+material.displacementScale = .15
+gui.add(material, 'aoMapIntensity').min(0).max(1).step(.01)
+gui.add(material, 'metalness').min(0).max(1).step(.01)
+gui.add(material, 'displacementScale').min(0).max(1).step(.01)
+gui.add(material.normalScale, 'x').min(0).max(1).step(.01).name("NormalScale X")
+gui.add(material.normalScale, 'y').min(0).max(1).step(.01).name("NormalScale Y")
 // material.wireframe = true
+material.envMap = environmentMapTexture
 
 
 /**
@@ -166,17 +168,17 @@ const moonColorTexture = textureLoader.load("textures/moon/earthTextureMap.jpg")
  */
 
 // material to show its capacities
-const material = new THREE.MeshStandardMaterial()
-material.metalness = .7
-material.roughness = .2
-material.envMap = environmentMapTexture
-material.normalMap = doorNormalTexture
-material.displacementScale = .15
-material.displacementMap = doorHeightTexture
-gui.add(material, 'aoMapIntensity').min(0).max(1).step(.01)
-gui.add(material, 'displacementScale').min(0).max(1).step(.01)
-gui.add(material.normalScale, 'x').min(0).max(1).step(.01).name("NormalScale X")
-gui.add(material.normalScale, 'y').min(0).max(1).step(.01).name("NormalScale Y")
+// const material = new THREE.MeshStandardMaterial()
+// material.envMap = environmentMapTexture
+// material.metalness = .7
+// material.roughness = .2
+// material.normalMap = doorNormalTexture
+// material.displacementScale = .15
+// material.displacementMap = doorHeightTexture
+// gui.add(material, 'aoMapIntensity').min(0).max(1).step(.01)
+// gui.add(material, 'displacementScale').min(0).max(1).step(.01)
+// gui.add(material.normalScale, 'x').min(0).max(1).step(.01).name("NormalScale X")
+// gui.add(material.normalScale, 'y').min(0).max(1).step(.01).name("NormalScale Y")
 
 
 const sphere = new THREE.Mesh(
