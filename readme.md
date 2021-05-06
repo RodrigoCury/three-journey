@@ -16,7 +16,7 @@ Learning Three Js with Three Js Journey
     * [X] 3D Text
 
 * Level 2 - Classic Techniques
-    * [ ] Lights
+    * [X] Lights
     * [ ] Shadows
     * [ ] Haunted House
     * [ ] Particles
