@@ -11,13 +11,13 @@ Learning Three Js with Three Js Journey
     * [X] Fullscreen and Resizing
     * [X] Geometries
     * [X] Degub UI
-    * [X] Textures | stop at 50 min
+    * [X] Textures
     * [X] Materials
     * [X] 3D Text
 
 * Level 2 - Classic Techniques
     * [X] Lights
-    * [ ] Shadows
+    * [ ] Shadows | stop at 45 min
     * [ ] Haunted House
     * [ ] Particles
     * [ ] Galaxy Generator
