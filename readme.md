@@ -17,7 +17,7 @@ Learning Three Js with Three Js Journey
 
 * Level 2 - Classic Techniques
     * [X] Lights
-    * [ ] Shadows | stop at 45 min
+    * [X] Shadows
     * [ ] Haunted House
     * [ ] Particles
     * [ ] Galaxy Generator

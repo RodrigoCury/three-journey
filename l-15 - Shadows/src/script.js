@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
+import { PlaneBufferGeometry } from 'three'
 
 /**
  * Base
@@ -28,6 +29,7 @@ const simpleShadow = textureLoader.load('/textures/simpleShadow.jpg')
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
 scene.add(ambientLight)
+
 
 // Directional light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
@@ -129,7 +131,19 @@ plane.position.y = - 0.5
 
 plane.castShadow = true
 plane.receiveShadow = true
-scene.add(sphere, plane, box)
+
+const sphereShadow = new THREE.Mesh(
+    new PlaneBufferGeometry(1.5, 1.5),
+    new THREE.MeshBasicMaterial({
+        color: 0x000000,
+        transparent: true,
+        alphaMap: simpleShadow
+    })
+)
+sphereShadow.rotation.x = - Math.PI / 2
+sphereShadow.position.y = plane.position.y + .01
+
+scene.add(sphere, plane, box, sphereShadow)
 
 /**
  * Sizes
@@ -198,7 +212,15 @@ gui.add(movements, 'lightAmplitude').min(0).max(10).step(0.001).name('lightAmpli
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
-    box.position.x = Math.sin(elapsedTime) * movements.xzDistance
+
+    sphere.position.x = Math.sin(elapsedTime) * .5
+    sphere.position.z = Math.cos(elapsedTime) * .5
+    sphereShadow.position.x = sphere.position.x
+    sphereShadow.position.z = sphere.position.z
+
+    sphere.position.y = (Math.abs(Math.sin(elapsedTime * 3)))
+    sphereShadow.material.opacity = (.9 - sphere.position.y) * .7
+    box.position.x = Math.sin(elapsedTime * 3) * movements.xzDistance
     box.position.z = Math.cos(elapsedTime) * movements.xzDistance
     // directionalLight.position.x = Math.sin(elapsedTime * movements.lightRotationSpeed) * movements.xzDistance
     // directionalLight.position.z = Math.cos(elapsedTime * movements.lightRotationSpeed) * movements.xzDistance
