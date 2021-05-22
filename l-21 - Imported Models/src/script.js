@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { PointsMaterial } from 'three'
 
 
 /**
@@ -28,6 +29,9 @@ const loadManager = new THREE.LoadingManager(
 /**
  * Models
  */
+const group = new THREE.Group()
+scene.add(group)
+
 const dracoLoader = new DRACOLoader(loadManager)
 dracoLoader.setDecoderPath('/draco/')
 
@@ -35,35 +39,48 @@ const gltfLoader = new GLTFLoader(loadManager)
 gltfLoader.dracoLoader = dracoLoader
 
 let mixer = null
+
 gltfLoader.load(
-    'models/Fox/glTF/Fox.gltf',
+    'models/Fox/glTF/Fox.glb',
     // 'models/dna/dna.glb',
     (gltf) => {
-        gltf.scene.scale.set(.025, .025, .025)
         scene.add(gltf.scene)
+        // const mesh = gltf.scene.children[0].children[0]
 
-        mixer = new THREE.AnimationMixer(gltf.scene)
-        const action = mixer.clipAction(gltf.animations[2])
+        // const pointGeometry = new THREE.BufferGeometry()
+        // pointGeometry.setAttribute('position',
+        //     new THREE.BufferAttribute(
+        //         new Float32Array(mesh.geometry.attributes.position.array),
+        //         3)
+        // )
+        // pointGeometry.center()
 
-        action.play()
+        // const pointMesh = new THREE.Points(pointGeometry,
+        //     new THREE.PointsMaterial({
+        //         color: "#fff",
+        //         size: .0125,
+        //         sizeAttenuation: true,
+        //         // alphaMap: texture,
+        //         transparent: true,
+        //         // alphaTest: 0.01,
+        //         // depthTest: false,
+        //         depthWrite: false,
+        //         // blending: THREE.AdditiveBlending,
+        //         // vertexColors: true, 
+        //     })
+        // )
+        // pointMesh.scale.set(.25, .25, .25)
+
+        // group.add(pointMesh)
+        // mixer = new THREE.AnimationMixer(mesh)
+        // const action = mixer.clipAction(gltf.animations[2])
+
+        // action.play()
     }
 )
 
-
-/**
- * Floor
- */
-const floor = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(10, 10),
-    new THREE.MeshStandardMaterial({
-        color: '#444444',
-        metalness: 0,
-        roughness: 0.5
-    })
-)
-floor.receiveShadow = true
-floor.rotation.x = - Math.PI * 0.5
-scene.add(floor)
+group.rotation.y = Math.PI * 0.5
+group.rotation.x = Math.PI * 0.55
 
 /**
  * Lights
@@ -109,7 +126,7 @@ window.addEventListener('resize', () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(2, 2, 2)
+camera.position.set(0, 0, 4)
 scene.add(camera)
 
 // Controls
@@ -128,6 +145,12 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+
+/**
+ * Helpers
+ */
+
+scene.add(new THREE.AxesHelper(2))
 /**
  * Animate
  */
@@ -143,6 +166,9 @@ const tick = () => {
     if (mixer) {
         mixer.update(deltaTime)
     }
+
+    // Group
+    group.rotation.z = elapsedTime
 
     // Update controls
     controls.update()
