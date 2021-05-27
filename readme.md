@@ -18,16 +18,16 @@ Learning Three Js with Three Js Journey
 * Level 2 - Classic Techniques
     * [X] Lights
     * [X] Shadows
-    * [ ] Haunted House
-    * [ ] Particles
-    * [ ] Galaxy Generator
-    * [ ] Raycaster
+    * [X] Haunted House
+    * [X] Particles
+    * [X] Galaxy Generator
+    * [X] Raycaster
 
 * Level 3 - Advanced Techniques
-    * [ ] Physics
-    * [ ] Imported Models
-    * [ ] Custom Models with Blender
-    * [ ] Realistic Render
+    * [X] Physics
+    * [X] Imported Models
+    * [X] Custom Models with Blender
+    * [X] Realistic Render
 
 * Level 4 - Shaders
     * [ ] Shaders
