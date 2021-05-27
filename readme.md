@@ -30,7 +30,7 @@ Learning Three Js with Three Js Journey
     * [X] Realistic Render
 
 * Level 4 - Shaders
-    * [ ] Shaders
+    * [X] Shaders
     * [ ] Shaders Patterns
     * [ ] Raging Sea
     * [ ] Animated Galaxy

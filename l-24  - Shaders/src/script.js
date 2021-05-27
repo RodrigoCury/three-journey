@@ -1,0 +1,136 @@
+import './style.css'
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as dat from 'dat.gui'
+import vertexShader from './shaders/test/vertex.glsl'
+import fragmentShader from './shaders/test/fragment.glsl'
+
+/**
+ * Base
+ */
+// Debug
+const gui = new dat.GUI()
+
+// Canvas
+const canvas = document.querySelector('canvas.webgl')
+
+// Scene
+const scene = new THREE.Scene()
+scene.background = new THREE.Color("#ffffff")
+
+/**
+ * Textures
+ */
+const loadManager = new THREE.LoadingManager()
+loadManager.onStart = () => console.log('Started Loading');
+loadManager.onProgress = (url, loaded, total) => console.log(
+    `Loaded ${url.split('/').reduce((a, b) => b)}`)
+loadManager.onLoad = () => console.log("Finished Loading")
+loadManager.onError = url => console.warn(url.split('/').reduce((a, b) => b) + "Error Loading")
+const textureLoader = new THREE.TextureLoader(loadManager)
+
+const flag = textureLoader.load('/textures/fern.png?')
+
+/**
+ * Test mesh
+ */
+// Geometry
+const geometry = new THREE.PlaneBufferGeometry(1, 1, 128, 128)
+
+const count = geometry.attributes.position.count
+const randoms = new Float32Array(count)
+
+for (let i = 0; i < count; i++) {
+    randoms[i] = Math.random()
+}
+
+geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 1))
+
+// Material
+const material = new THREE.RawShaderMaterial({
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader,
+    side: THREE.DoubleSide,
+    // wireframe: true,
+    transparent: true,
+    uniforms: {
+        uFrequency: { value: new THREE.Vector2(10.0, 5.0) },
+        uElapsedTime: { value: 0 },
+        uColor: { value: new THREE.Color("#980124") },
+        uTexture: { value: flag }
+    },
+})
+
+
+// Mesh
+const mesh = new THREE.Mesh(geometry, material)
+mesh.needsUpdate = true
+scene.add(mesh)
+gui.add(material.uniforms.uFrequency.value, 'x').min(0).max(40).step(0.001)
+gui.add(material.uniforms.uFrequency.value, 'y').min(0).max(40).step(0.001)
+
+/**
+ * Sizes
+ */
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+
+window.addEventListener('resize', () => {
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+/**
+ * Camera
+ */
+// Base camera
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+camera.position.set(0.25, - 0.25, 1)
+scene.add(camera)
+
+// Controls
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
+
+/**
+ * Renderer
+ */
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas
+})
+renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+/**
+ * Animate
+ */
+const clock = new THREE.Clock()
+
+const tick = () => {
+    const elapsedTime = clock.getElapsedTime()
+
+    // update uElapsedTime
+    material.uniforms.uElapsedTime.value = elapsedTime
+
+    // Update controls
+    controls.update()
+
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+}
+
+tick()
