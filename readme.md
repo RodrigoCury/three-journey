@@ -31,7 +31,7 @@ Learning Three Js with Three Js Journey
 
 * Level 4 - Shaders
     * [X] Shaders | GLSL 
-    * [ ] Shaders Patterns
+    * [X] Shaders Patterns
     * [ ] Raging Sea
     * [ ] Animated Galaxy
     * [ ] Modified Materials
