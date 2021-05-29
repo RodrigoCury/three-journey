@@ -34,7 +34,7 @@ Learning Three Js with Three Js Journey
     * [X] Shaders Patterns
     * [X] Raging Sea
     * [X] Animated Galaxy
-    * [ ] Modified Materials
+    * [X] Modified Materials
 
 * Level 5 - Extra
     * [ ] Post Processing
