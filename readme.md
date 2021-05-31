@@ -37,7 +37,7 @@ Learning Three Js with Three Js Journey
     * [X] Modified Materials
 
 * Level 5 - Extra
-    * [ ] Post Processing
+    * [X] Post Processing
     * [ ] Performance tips
     * [ ] Intro and Loading Progress
     * [ ] Mixing html and webGL
