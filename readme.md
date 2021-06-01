@@ -40,4 +40,4 @@ Learning Three Js with Three Js Journey
     * [X] Post Processing
     * [X] Performance tips
     * [X] Intro and Loading Progress
-    * [ ] Mixing html and webGL
+    * [X] Mixing html and webGL
