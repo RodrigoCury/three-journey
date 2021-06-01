@@ -39,5 +39,5 @@ Learning Three Js with Three Js Journey
 * Level 5 - Extra
     * [X] Post Processing
     * [X] Performance tips
-    * [ ] Intro and Loading Progress
+    * [X] Intro and Loading Progress
     * [ ] Mixing html and webGL
